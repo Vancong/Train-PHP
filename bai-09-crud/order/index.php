@@ -109,6 +109,8 @@ try {
                 <td><?= $order['status'] ?></td>
                 <td><?= $order['created_at'] ?></td>
                 <td>
+                    <a href="create.php">Thêm đơn</a>
+
                     <a href="show.php?id=<?= $order['id'] ?>">Xem</a>
 
                     <a href="edit.php?id=<?= $order['id'] ?>">Sửa</a>
