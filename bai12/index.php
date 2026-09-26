@@ -12,9 +12,11 @@ $customer = new Customer('Tran Van cong', '020393232');
 $order = new Order('1', $customer);
 $order->addProduct($product);
 $order->addProduct($product1);
+echo $customer->getName() . "\n";
+echo $customer->getPhone() . "\n";
 foreach ($order->getProducts() as $item) {
-    echo $item->getName();
-    echo $item->getPrice();
-    echo $item->getQuantity();
+    echo $item->getName() . "\n";
+    echo $item->getPrice() . "\n";
+    echo $item->getQuantity() . "\n";
 }
 echo $order->getTotal();
