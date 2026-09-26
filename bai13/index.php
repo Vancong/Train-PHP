@@ -1,35 +1,32 @@
 <?php
-require_once './order.service.php';
+require_once './controller.php';
+/** @var array $orders */
 
-$service = new OrderService();
+?>
 
-$existingOrders = [
-    [
-        'order_code' => 'DH001'
-    ],
-    [
-        'order_code' => 'DH002'
-    ]
-];
+<!Doctype html>
+<html lang="en">
 
-$items = [
-    [
-        'price' => 50,
-        'quantity' => 1
-    ],
-    [
-        'price' => 12,
-        'quantity' => 2
-    ]
-];
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách đơn hàng</title>
+</head>
 
-$total = $service->calculateTotal($items);
-echo $total . "\n";
+<body>
+    <h1>Danh sách đơn hàng</h1>
+    <?php foreach ($orders as $order): ?>
+        <h2> Đơn hàng #<?= $order['order_code'] ?> </h2>
+        <p> Tên khách hàng: <?= $order['customer_name'] ?> </p>
+        <p> Số điện thoại: <?= $order['phone'] ?> </p>
+        <?php foreach ($order['items'] as $item): ?>
+            <p> Tên sản phẩm: <?= $item['name'] ?> </p>
+            <p> Số lượng: <?= $item['quantity'] ?> </p>
+            <p> Giá: <?= number_format($item['price']) ?> VND </p>
+        <?php endforeach ?>
+        <p> Tổng tiền: <?= number_format($order['total']) ?> VND </p>
+        <p> Trạng thái: <?= $order['status'] ?> </p>
+    <?php endforeach ?>
+</body>
 
-$isDuplicate = $service->checkDuplicate('DH00123', $existingOrders);
-var_dump($isDuplicate);
-echo $isDuplicate ? "Đơn hàng bị trùng" : "Đơn hàng không bị trùng \n";
-
-echo $service->getStatus('pending') . "\n";
-echo $service->getStatus('shipped') . "\n";
-echo $service->getStatus('abc') . "\n";
+</html>
